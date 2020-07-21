@@ -8,9 +8,32 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+      hasRepos: false
     }
     this.search = this.search.bind(this);
+    this.getRepos = this.getRepos.bind(this);
+  }
+
+  componentDidMount() {
+    this.getRepos();
+  }
+
+  getRepos() {
+    let server = 'http://localhost:1128';
+    $.ajax({
+      url: server + '/repos',
+      method: 'GET',
+      success: (response) => {
+        this.setState({
+          repos: response
+        });
+        console.log('Successfully able to get the data: ', this.state.repos);
+      },
+      error: (error) => {
+        console.log('Error in retrieving the data: ', error);
+      }
+    });
   }
 
   search (term) {
@@ -23,6 +46,7 @@ class App extends React.Component {
         username: term
       },
       contentType: 'application/json',
+      processData: false,
       success: (response) => {
         console.log('Successfully posted the data: ', response);
       },
