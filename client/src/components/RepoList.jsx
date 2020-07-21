@@ -18,7 +18,7 @@ const RepoList = ({ repos }) => {
             {repos[0] ?
               Object.keys(repos[0]).map((eachKey, index) => {
                 return (
-                  (eachKey !== '_id' && eachKey !== '__v') ? <th style={style} key={index}>{eachKey}</th> :  null
+                  (eachKey !== '_id' && eachKey !== '__v' && eachKey !== 'updatedAt' && eachKey !== 'createdAt') ? <th style={style} key={index}>{eachKey}</th> :  null
                   )
               })
 

@@ -22,6 +22,7 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   db.Repo.find({})
+    .sort({'updatedAt': -1 })
     .limit(25)
     .then(response => {
       res.send(response)

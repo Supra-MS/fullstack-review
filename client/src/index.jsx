@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   search (term) {
-    console.log(`${term} was searched`);
+    console.log('calling search : ', term );
     let server = 'http://localhost:1128';
     $.ajax({
       url: server + '/repos',
@@ -45,10 +45,11 @@ class App extends React.Component {
       data: {
         username: term
       },
-      contentType: 'application/json',
-      processData: false,
       success: (response) => {
         console.log('Successfully posted the data: ', response);
+        setTimeout(() => {
+          this.getRepos();
+        }, 800)
       },
       error: (error) => {
         console.log('Error posting the data: ', error);
@@ -60,8 +61,8 @@ class App extends React.Component {
     return (
     <div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search}/>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }

@@ -19,7 +19,7 @@ let repoSchema = mongoose.Schema({
   }
 },
   {
-    timestamp: true
+    timestamps: true
   }
 );
 
