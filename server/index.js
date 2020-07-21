@@ -18,8 +18,14 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  db.Repo.find({})
+    .limit(25)
+    .then(response => {
+      res.send(response)
+    })
+    .catch(error => {
+      console.log('Error retrieving the data: ', error);
+    })
 });
 
 let port = 1128;

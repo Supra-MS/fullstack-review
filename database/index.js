@@ -48,4 +48,4 @@ let save = (repoDetails) => {
   })
 }
 
-module.exports.save = save;
+module.exports = { save, Repo };
