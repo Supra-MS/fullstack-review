@@ -32,8 +32,8 @@ const RepoList = ({ repos }) => {
                 <tr key={`${index + 399}`}>
                   <td style={style}>{repo.id}</td>
                   <td style={style}>{repo.repoName}</td>
-                  <td style={style}>{repo.owner}</td>
-                  <td style={style}>{repo.html_url}</td>
+                  <td style={style}><a href={repo.html_url} target="_blank">{repo.owner}</a></td>
+                  <td style={style}><a href={repo.html_url} target="_blank">{repo.html_url}</a></td>
                 </tr>
               )
             })
