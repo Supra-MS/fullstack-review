@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RepoList = ({ repos }) => {
+const RepoList = ({ repos, isError, isSuccess, successMsg }) => {
   let style = {
     border: "1px solid black",
     width: "25px",
@@ -11,6 +11,8 @@ const RepoList = ({ repos }) => {
  return (
     <div>
       <h4> Repo List Component </h4>
+      {isError ? <h5 style={{color: "red"}}> User Not Found </h5> : null}
+      {isSuccess ? <h5 style={{color: "green"}}> {successMsg} </h5> : null}
       <h5 style={{color: "green"}}>There are {repos.length} repos.</h5>
       <table>
         <thead>

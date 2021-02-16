@@ -28,13 +28,13 @@ let Repo = mongoose.model('Repo', repoSchema);
 let save = (repoDetails) => {
   // InsertMany()
 
-  repoDetails.forEach(repo => {
+  repoDetails.map(repo => {
     Repo.findOne({id: repo.id}, (err, res) => {
       if (err) {
         console.log('Error in finding a single id: ', err);
       } else {
         if (res) {
-          console.log('Record already exists!!');
+          return;
         } else {
           Repo.create({
             id: repo.id,

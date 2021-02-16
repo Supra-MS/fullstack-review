@@ -9,7 +9,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       repos: [],
-      hasRepos: false
+      hasRepos: false,
+      isSuccess: false,
+      isError: false,
+      successMsg: ''
     }
     this.search = this.search.bind(this);
     this.getRepos = this.getRepos.bind(this);
@@ -49,10 +52,28 @@ class App extends React.Component {
         console.log('Successfully posted the data: ', response);
         setTimeout(() => {
           this.getRepos();
-        }, 800)
+        }, 800);
+        if (response.message === 'Posted user name!') {
+          this.setState({
+            successMsg: 'User Added to the list'
+          });
+        }
+        if (response.message === 'User already exists in the table!!') {
+          this.setState({
+            successMsg: response.message
+          });
+        }
+        this.setState({
+          isSuccess: true,
+          isError: false
+        });
       },
       error: (error) => {
         console.log('Error posting the data: ', error);
+        this.setState({
+          isError: true,
+          isSuccess: false
+        });
       }
     });
   }
@@ -62,7 +83,7 @@ class App extends React.Component {
     <div>
       <h1>Github Fetcher</h1>
       <Search onSearch={this.search}/>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} isError={this.state.isError} isSuccess={this.state.isSuccess} successMsg={this.state.successMsg} />
     </div>)
   }
 }

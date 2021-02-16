@@ -19,10 +19,11 @@ let getReposByUsername = (gitUsername) => {
   return axios(options)
   .then((response) => {
     console.log('Successfully able to get username from the Git' );
-    return response.data;
+    return { response, status: response.status };
   })
   .catch((error) => {
-    console.log('Failed to get username from the Git: ', error);
+    console.log('Failed to get username from the Git: ');
+    return { error, status: error.response.status};
   });
 
 }
